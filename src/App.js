@@ -1,24 +1,46 @@
 import React, {Component} from 'react';
-import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "React sites",
-      url1: "https://reactjs.org/",
-      url2: "https://material-ui.com"
+      clickResult: '',
+      changeResult: '',
+      inputResult: '',
+      keyupResult: ''
     };
+  }
+
+  onClick() {
+    this.setState({clickResult: "clicked"});
+  }
+
+  onChange(e) {
+    this.setState({changeResult: e.target.value});
+  }
+
+  onInput(e) {
+    this.setState({inputResult: e.target.value});
+  }
+
+  onKeyUp(e) {
+    this.setState({keyupResult: e.target.value});
   }
 
   render() {
     return (
         <div>
-          <h3>{this.state.title}</h3>
-          <ul>
-            <li><a href={this.state.url1}>React</a></li>
-            <li><a href={this.state.url2}>Material-UI</a></li>
-          </ul>
+          <button onClick={this.onClick.bind(this)}>click</button>
+          {this.state.clickResult}
+          <br/>
+          <input onChange={this.onChange.bind(this)} placeholder="change"/>
+          {this.state.changeResult}
+          <br/>
+          <input onInput={this.onInput.bind(this)} placeholder="input"/>
+          {this.state.inputResult}
+          <br/>
+          <input onKeyUp ={this.onKeyUp.bind(this)} placeholder="keyup"/>
+          {this.state.keyupResult}
         </div>
     );
   }
